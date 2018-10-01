@@ -1,0 +1,24 @@
+{% extends 'testsapp/base.html' %}
+{% block content %}
+    <div class="well well-sm">
+        <form method="post" class="form-horizontal">
+            {% csrf_token %}
+            {% include "testsapp/message.html" %}
+            <input type="hidden" name="question_id" value="{{ question.pk }}">
+            <h1>Вопрос</h1>
+            <blockquote class="blockquote">
+            <p>{{ question.text }}</p>
+            </blockquote>
+            <h2>Ответы</h2>
+            {% for answer in answers %}
+            <div class="form-check">
+                <label class="lead text-info">
+                        <input type="checkbox" name="answer" class="checkbox-custom" value="{{ answer.pk }}">
+                        {{ answer.text }}
+                </label>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-default" onclick="location.href='{% url 'next_question' test_id%}';">Следующий</button>
+        </form>
+    </div>
+{% endblock %}

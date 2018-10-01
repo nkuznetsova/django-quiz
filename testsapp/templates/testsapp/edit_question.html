@@ -1,0 +1,48 @@
+{% extends 'testsapp/base.html' %}
+{% include "testsapp/error.html" %}
+{% block content %}
+    <div class="well">
+        <form id="QuestionForm" method="post" class="form-horizontal">
+            {% csrf_token %}
+
+            {% include "testsapp/error.html" %}
+
+            {{form.test}}
+            <div class="form-group">
+                <div class="col-sm-8">
+                    {{form.text}}
+                </div>
+            </div>
+            <div class="form-group col-sm-12">
+                <div class="col-sm-6">
+                    {% for checkbox, input in form.get_answer_fields %}
+                        <div class="form-group answer-group">
+                            <div class="input-group" name="answer">
+                                <span class="input-group-addon">
+                                    {{ checkbox }}
+                                </span>
+                                {{ input }}
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="form-group answer-group hide" id="answerTemplate">
+                        <div class="input-group" name="answer">
+                            <span class="input-group-addon">
+                                <input type="checkbox" name="newiscorrect_" value=1>
+                            </span>
+                            <input type="text" class="form-control" name="newanswer_" placeholder="Введите ответ">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default removeButton"><i class="fa fa-minus"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary addButton">Добавить ответ</button>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </form>
+    </div>
+{% endblock %}

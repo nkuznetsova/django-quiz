@@ -1,0 +1,23 @@
+{% extends 'testsapp/base.html' %}
+{% block content %}
+<div class="well well-sm" >
+    {% if not tests %}
+    <h4 class="list-group-item-heading">Пока нет готовых тестов</h4>
+    {% endif %}
+    <table class="table table-hover">
+        <tbody>
+        {% for test in tests %}
+        <tr>
+            <td>
+            <h4 class="list-group-item-heading">{{ test.name }}</h4>
+            <p class="list-group-item-text">{{ test.description }}</p>
+            </td>
+            <td>
+                <button class="btn btn-default" onclick="location.href='{% url 'next_question' test.pk %}';">Начать тест</button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

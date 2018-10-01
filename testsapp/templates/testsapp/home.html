@@ -1,0 +1,29 @@
+{% extends 'testsapp/base.html' %}
+{% block content %}
+<div class="well well-sm" >
+    <div class="list-group">
+        {% for test_group in test_groups %}
+        {% if request.user.is_superuser %}
+            {% if test_group.pk %}
+                <a href="{% url 'edit_testgroup' test_group.pk %}" class="list-group-item">
+            {% else %}
+                <a href="{% url 'tests_without_group' %}" class="list-group-item">
+            {% endif %}
+        {% else %}
+             {% if test_group.pk %}
+                <a href="{% url 'show_tests' test_group.pk %}" class="list-group-item">
+             {% else %}
+                <a href="{% url 'show_tests' %}" class="list-group-item">
+             {% endif %}
+        {% endif %}
+                    <h4 class="list-group-item-heading">{{ test_group.name }}</h4>
+                    <p class="list-group-item-text">{{ test_group.description }}</p>
+                </a>
+        {% endfor %}
+    </div>
+    {% if request.user.is_superuser %}
+    <button type="button" class="btn btn-success" onclick="location.href='{% url 'add_testgroup' %}';">Создать категорию</button>
+    <button type="button" class="btn btn-info" onclick="location.href='{% url 'add_test' %}';">Создать тест</button>
+    {% endif %}
+</div>
+{% endblock %}

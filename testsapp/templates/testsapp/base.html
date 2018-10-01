@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load bootstrap3 %}
+<script src="{% bootstrap_jquery_url %}"></script>
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="{% static 'js/test.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'tests.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+{% include "testsapp/navbar.html" %}
+<div class="container">
+    <div class="row">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

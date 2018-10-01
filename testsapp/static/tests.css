@@ -1,0 +1,14 @@
+.div-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.checkbox-custom {
+	position: relative;      /* Обязательно задаем, чтобы мы могли абсолютным образом позиционировать псевдоэлемент внютри нашего кастомного чекбокса */
+	width: 20px;             /* Обязательно задаем ширину */
+	height: 20px;            /* Обязательно задаем высоту */
+	border: 2px solid #ccc;
+	border-radius: 3px;
+}

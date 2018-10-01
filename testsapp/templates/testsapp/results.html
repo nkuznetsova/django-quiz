@@ -1,0 +1,29 @@
+{% extends 'testsapp/base.html' %}
+{% block content %}
+<h1>Ваши результаты:</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Вопрос</th>
+            <th>Правильный ответ</th>
+            <th>Ваш ответ</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for result in text_results %}
+        {% if result.is_correct %}
+        <tr class="success">
+        {% else %}
+        <tr class="danger">
+        {% endif %}
+            <td>{{ result.question }}</td>
+            <td>{{ result.correct_result }}</td>
+            <td>{{ result.user_result }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <h4>Количество правильных ответов: {{ common_results.number_correct_questions }}</h4>
+    <h4>Количество неправильных ответов: {{ common_results.number_wrong_questions }}</h4>
+    <h4>Правильных ответов в процентах: {{ common_results.percent }}</h4>
+</table>
+{% endblock %}
