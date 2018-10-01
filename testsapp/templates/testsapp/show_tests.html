@@ -13,7 +13,9 @@
             <p class="list-group-item-text">{{ test.description }}</p>
             </td>
             <td>
+                {% if request.user.is_authenticated %}
                 <button class="btn btn-default" onclick="location.href='{% url 'next_question' test.pk %}';">Начать тест</button>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

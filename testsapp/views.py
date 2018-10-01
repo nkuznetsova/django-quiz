@@ -19,8 +19,7 @@ from .models import UserResult
 from django.contrib.auth.models import User
 from django.views.generic import View
 
-from django.contrib.auth.decorators import user_passes_test, login_required
-from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import user_passes_test
 
 def home(request):
     test_groups = list(TestGroup.objects.all().values('pk', 'name', 'description'))
@@ -186,7 +185,6 @@ def logout_form(request):
 class UserQuestion(View):
     test_id = ''
 
-    @method_decorator(lambda x: login_required(x, login_url='login'))
     def dispatch(self, *args, **kwargs):
         self.test_id = self.kwargs.get('test_id', None)
         return super(UserQuestion, self).dispatch(*args, **kwargs)

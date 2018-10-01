@@ -1,6 +1,17 @@
 {% extends 'testsapp/base.html' %}
 {% block content %}
 <div class="well well-sm" >
+    {% if not request.user.is_authenticated %}
+    <div class="alert alert-warning">
+        <strong>Внимание!</strong> Чтобы проходить тесты авторизуйтесь. Чтобы создавать тесты войдите под суперпользователем.
+    </div>
+    {% else %}
+    {% if not test_groups %}
+    <div class="alert alert-warning">
+        <strong>Не создано ни одного теста. Войдите под суперпользователем, чтобы создать.</strong>
+    </div>
+    {% endif %}
+    {% endif %}
     <div class="list-group">
         {% for test_group in test_groups %}
         {% if request.user.is_superuser %}
